@@ -1,7 +1,76 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<h1>Ancient Indian Home Remedies</h1>
-<p>Explore traditional remedies for skin, hair, digestion, immunity and more.</p>
+
+<section class="remedy-section">
+
+    <h1 class="remedy-title">
+        Explore the <span>Certified Traditional</span><br>
+        remedies for the <strong>Vedacure</strong>
+    </h1>
+
+    <p class="remedy-subtitle">
+        Discover trusted home remedies with smart suggestions,
+        guided by tradition and enhanced with AI.
+    </p>
+
+    <div class="remedy-wrapper">
+
+    <button class="arrow" onclick="slideLeft()">&#8592;</button>
+
+    <div class="remedy-viewport">
+        <div class="remedy-track" id="remedyTrack">
+
+            <!-- CARD -->
+            <div class="remedy-card">
+                <div class="card-inner">
+                    <img src="{% static 'images/haircare.jpg.png' %}">
+                </div>
+                {% comment %} <h3>Hair Care</h3> {% endcomment %}
+            </div>
+
+            <div class="remedy-card">
+                <div class="card-inner">
+                    <img src="{% static 'images/skincare.jpg.png' %}">
+                </div>
+            
+            </div>
+
+            <div class="remedy-card">
+                <div class="card-inner">
+                    <img src="{% static 'images/bodycare.jpg.png' %}">
+                </div>
+                {% comment %} <h3>Body Care</h3> {% endcomment %}
+            </div>
+
+            <!-- same cards repeat (10 total) -->
+        </div>
+    </div>
+
+    <button class="arrow" onclick="slideRight()">&#8594;</button>
+
+</div>
+
+
+</section>
+
+<script>
+let index = 0;
+
+function slideRight() {
+    const track = document.getElementById("remedyTrack");
+    index++;
+    if (index > 7) index = 0;
+    track.style.transform = `translateX(-${index * 33.33}%)`;
+}
+
+function slideLeft() {
+    const track = document.getElementById("remedyTrack");
+    index--;
+    if (index < 0) index = 7;
+    track.style.transform = `translateX(-${index * 33.33}%)`;
+}
+</script>
+
 {% endblock %}

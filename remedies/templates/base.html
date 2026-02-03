@@ -4,32 +4,99 @@
 <head>
     <meta charset="UTF-8">
     <title>VedaCure</title>
-
-    <!-- ✅ CSS LINK (MOST IMPORTANT) -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
 </head>
-
 <body>
 
-    <nav class="navbar">
-        <div class="logo">VedaCure +</div>
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="logo">VedaCure +</div>
 
-        <ul class="nav-links">
-            <li><a href="#">Home +</a></li>
-            <li><a href="#">Remedies +</a></li>
-            <li><a href="#">AI Suggest +</a></li>
-            <li><a href="#">About +</a></li>
-            <li><a href="#">Blog +</a></li>
-            <li><a href="#">Contact +</a></li>
-        </ul>
+    <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home +</a></li>
+        <li><a href="{% url 'remedies' %}">Remedies +</a></li>
+        <li><a href="#ai">AI Suggest +</a></li>
+        <li><a href="#about">About +</a></li>
+        <li><a href="#blog">Blog +</a></li>
+        <li><a href="#contact">Contact +</a></li>
+    </ul>
 
-        <a href="#" class="bot-btn">VedaBOT</a>
-    </nav>
+    <a href="javascript:void(0)" class="bot-btn" id="openBot">VedaBOT</a>
+</nav>
 
-    {% block content %}
-    {% endblock %}
+<!-- ================= PAGE CONTENT ================= -->
+{% block content %}{% endblock %}
+
+<!-- ================= VEDABOT ================= -->
+<div id="chatBox" class="chat-box">
+    <div class="chat-header">
+        <span>VedaBOT 🤖</span>
+        <button id="closeBot">✖</button>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+        <div class="bot-msg">Hi, I am VedaBOT 🤖. How can I help you?</div>
+    </div>
+
+    <div class="chat-footer">
+        <input type="text" id="userInput" placeholder="Ask something...">
+        <button id="sendBtn">Send</button>
+    </div>
+</div>
+
+<!-- ================= BOT SCRIPT ================= -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const openBot = document.getElementById("openBot");
+    const closeBot = document.getElementById("closeBot");
+    const chatBox = document.getElementById("chatBox");
+    const sendBtn = document.getElementById("sendBtn");
+    const userInput = document.getElementById("userInput");
+    const chatBody = document.getElementById("chatBody");
+
+    openBot.onclick = () => chatBox.style.display = "flex";
+    closeBot.onclick = () => chatBox.style.display = "none";
+
+    function sendMessage() {
+        const msg = userInput.value.trim();
+        if (!msg) return;
+
+        const userDiv = document.createElement("div");
+        userDiv.className = "user-msg";
+        userDiv.innerText = msg;
+        chatBody.appendChild(userDiv);
+
+        userInput.value = "";
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        fetch("/vedabot/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg }),
+        })
+        .then(res => res.json())
+        .then(data => {
+            const botDiv = document.createElement("div");
+            botDiv.className = "bot-msg";
+            botDiv.innerText = data.reply;
+            chatBody.appendChild(botDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        })
+        .catch(() => {
+            const botDiv = document.createElement("div");
+            botDiv.className = "bot-msg";
+            botDiv.innerText = "Something went wrong.";
+            chatBody.appendChild(botDiv);
+        });
+    }
+
+    sendBtn.onclick = sendMessage;
+    userInput.addEventListener("keypress", e => {
+        if (e.key === "Enter") sendMessage();
+    });
+});
+</script>
 
 </body>
 </html>
