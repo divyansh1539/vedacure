@@ -5,6 +5,7 @@ body {
     background-color: #f4fff4;
 }
 
+
 /* ===== NAVBAR ===== */
 .navbar {
     background-color: #44c34a;
@@ -248,7 +249,7 @@ body {
 
 .remedy-section {
     background: #f7f9f3;
-    padding: 90px 40px;
+    padding: 60px 40px 90px;
     text-align: center;
 }
 
@@ -268,12 +269,14 @@ body {
 
 .remedy-subtitle {
     font-size: 17px;
-    max-width: 720px;
+    max-width: 900px;
     margin: 0 auto 70px;
     color: #333;
+    white-space: nowrap;
 }
 
-/* ===== SLIDER LAYOUT ===== */
+/* ================= SLIDER WRAPPER ================= */
+
 .remedy-wrapper {
     max-width: 1200px;
     margin: auto;
@@ -284,48 +287,85 @@ body {
 
 .remedy-viewport {
     width: 100%;
-    overflow: hidden;
+    perspective: 1200px;
+    overflow-x: hidden;   /* left-right control */
+    overflow-y: visible; 
 }
 
 .remedy-track {
+    position: relative;
+    height: 520px;
     display: flex;
-    transition: transform 0.8s ease;
+    justify-content: center;
+    align-items: flex-start;   /* 👈 yahi main fix */
+    padding-top: -10px; 
+
 }
 
-/* ===== CARD (BIG & CLEAN) ===== */
+/* ================= CARD (COVERFLOW STYLE) ================= */
+
+
 .remedy-card {
-    min-width: 33.3333%;
-    padding:  0 12px ;
-    box-sizing: border-box;
-    
+    position: absolute;
+    width: 340px;
+    transition: all 0.6s ease;
+    opacity: 0;
+    transform: scale(0.75);
+    transform-origin: center bottom; /* 👈 YAHI MAGIC */
+    pointer-events: none;
 }
 
-/* CARD BODY */
+/* CENTER CARD */
+.remedy-card.active {
+    transform: scale(1);
+    opacity: 1;
+    z-index: 5;
+    pointer-events: auto;
+}
+
+/* LEFT CARD */
+.remedy-card.prev {
+    transform: translateX(-260px) scale(0.85) rotateY(15deg);
+    opacity: 0.55;
+    z-index: 3;
+}
+
+/* RIGHT CARD */
+.remedy-card.next {
+    transform: translateX(260px) scale(0.85) rotateY(-15deg);
+    opacity: 0.55;
+    z-index: 3;
+}
+
+/* ================= CARD INNER ================= */
+
 .card-inner {
-    /* background: #ffffff; */
     border-radius: 28px;
-    /* padding: 20px; */
-    box-shadow: 0 16px 35px rgba(0,0,0,0.08);
-    height: 300px;
+    height: 420px;
+    overflow: visible;
+    background: transparent;
 }
 
-/* IMAGE – MAIN HERO */
+/* IMAGE */
 .card-inner img {
     width: 100%;
-    height: 300px;              /* 🔥 BIG IMAGE */
-    object-fit: contain !important;          /* 🔥 NO CUT, PRO LOOK */
-    border-radius: 22px;
+    height: 420px;
+    object-fit: contain;
+    border-radius: 28px;
+    background: transparent;
+    box-shadow: none !important;
 }
 
 /* TITLE */
 .remedy-card h3 {
     margin-top: 22px;
-    font-size: 22px;            /* 🔥 BIG TEXT */
+    font-size: 22px;
     font-weight: 600;
     color: #2f6b1f;
 }
 
-/* ===== ARROWS ===== */
+/* ================= ARROWS ================= */
+
 .arrow {
     width: 48px;
     height: 48px;
@@ -336,6 +376,26 @@ body {
     font-size: 24px;
     cursor: pointer;
     flex-shrink: 0;
+    transition: background 0.3s ease;
+}
+
+.arrow:hover {
+    background: #57b954;
+}
+/* ===== PAGE TRANSITION ===== */
+.page {
+    min-height: 100vh;
+    transition: transform 0.9s ease, opacity 0.9s ease;
+}
+
+.page.slide-up {
+    transform: translateY(-100vh);
+    opacity: 0;
+}
+
+.page.slide-down {
+    transform: translateY(100vh);
+    opacity: 0;
 }
 
 

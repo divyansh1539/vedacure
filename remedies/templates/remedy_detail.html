@@ -22,30 +22,78 @@
     <div class="remedy-viewport">
         <div class="remedy-track" id="remedyTrack">
 
-            <!-- CARD -->
             <div class="remedy-card">
                 <div class="card-inner">
-                    <img src="{% static 'images/haircare.jpg.png' %}">
+                    <img src="{% static 'images/haircare.jpg' %}">
                 </div>
-                {% comment %} <h3>Hair Care</h3> {% endcomment %}
+                
             </div>
-
+        
             <div class="remedy-card">
                 <div class="card-inner">
-                    <img src="{% static 'images/skincare.jpg.png' %}">
+                    <img src="{% static 'images/skincare.jpg' %}">
                 </div>
-            
+                
             </div>
-
+        
             <div class="remedy-card">
                 <div class="card-inner">
-                    <img src="{% static 'images/bodycare.jpg.png' %}">
+                    <img src="{% static 'images/bodycare.jpg' %}">
                 </div>
-                {% comment %} <h3>Body Care</h3> {% endcomment %}
+                
             </div>
-
-            <!-- same cards repeat (10 total) -->
+        
+            <div class="remedy-card">
+                <div class="card-inner">
+                    <img src="{% static 'images/oral and dental.jpg' %}">
+                </div>
+                
+            </div>
+        
+            <div class="remedy-card">
+                <div class="card-inner">
+                    <img src="{% static 'images/womens-period-health.jpg.jpg' %}">
+                </div>
+                
+            </div>
+        
+            <div class="remedy-card">
+                <div class="card-inner">
+                    <img src="{% static 'digestive-health.jpg' %}">
+                </div>
+                
+            </div>
+        
+            <div class="remedy-card">
+                <div class="card-inner">
+                    <img src="{% static 'images/mental-and-nervous.jpg' %}">
+                </div>
+                
+            </div>
+        
+            <div class="remedy-card">
+                <div class="card-inner">
+                    <img src="{% static 'images/pains and acne.jpg' %}">
+                </div>
+                
+            </div>
+        
+            <div class="remedy-card">
+                <div class="card-inner">
+                    <img src="{% static 'images/ent health.jpg' %}">
+                </div>
+                
+            </div>
+        
+            <div class="remedy-card">
+                <div class="card-inner">
+                    <img src="{% static 'images/cold cough and fever.jpg' %}">
+                </div>
+                
+            </div>
+        
         </div>
+        
     </div>
 
     <button class="arrow" onclick="slideRight()">&#8594;</button>
@@ -55,7 +103,7 @@
 
 </section>
 
-<script>
+{% comment %} <script>
 let index = 0;
 
 function slideRight() {
@@ -71,6 +119,6 @@ function slideLeft() {
     if (index < 0) index = 7;
     track.style.transform = `translateX(-${index * 33.33}%)`;
 }
-</script>
+</script> {% endcomment %}
 
 {% endblock %}

@@ -15,17 +15,21 @@
     <ul class="nav-links">
         <li><a href="{% url 'home' %}">Home +</a></li>
         <li><a href="{% url 'remedies' %}">Remedies +</a></li>
-        <li><a href="#ai">AI Suggest +</a></li>
-        <li><a href="#about">About +</a></li>
-        <li><a href="#blog">Blog +</a></li>
-        <li><a href="#contact">Contact +</a></li>
+        <li><a href="{% url 'ai_suggest' %}">AI Suggest +</a></li>
+        <li><a href="{% url 'about' %}">About +</a></li>
+        <li><a href="{% url 'blog' %}">Blog +</a></li>
+        <li><a href="{% url 'contact' %}">Contact +</a></li>
     </ul>
+    
 
     <a href="javascript:void(0)" class="bot-btn" id="openBot">VedaBOT</a>
 </nav>
 
 <!-- ================= PAGE CONTENT ================= -->
-{% block content %}{% endblock %}
+<div id="page" class="page">
+    {% block content %}{% endblock %}
+</div>
+
 
 <!-- ================= VEDABOT ================= -->
 <div id="chatBox" class="chat-box">
@@ -97,6 +101,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
+<script src="{% static 'main.js' %}"></script>
+
+
 
 </body>
 </html>

@@ -22,6 +22,19 @@ def home(request):
 def remedies_page(request):
     return render(request, "remedy_detail.html")
 
+def ai_suggest(request):
+    return render(request, "ai.html")
+
+def about(request):
+    return render(request, "about.html")
+
+def blog(request):
+    return render(request, "blog.html")
+
+def contact(request):
+    return render(request, "contact.html")
+
+
 
 
 # ================= VEDABOT API =================
