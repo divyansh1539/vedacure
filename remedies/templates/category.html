@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category_name }} - Premium Ayurvedic Solutions{% endblock %}
+
+{% block content %}
+
+<!-- ================= CATEGORY HERO SECTION ================= -->
+<section class="category-hero-modern">
+    <div class="category-hero-modern-bg">
+        <div class="category-orb category-orb-1"></div>
+        <div class="category-orb category-orb-2"></div>
+    </div>
+    
+    <div class="category-hero-modern-content">
+        <div class="category-badge">Premium Solutions</div>
+        <h1 class="category-hero-modern-title">{{ category_name }}</h1>
+        <p class="category-hero-modern-subtitle">Natural remedies for optimal wellness</p>
+    </div>
+</section>
+
+<!-- ================= PROBLEMS GRID SECTION ================= -->
+<section class="category-problems-section">
+    <div class="category-problems-container">
+        
+        <div class="category-section-header">
+            <h2 class="category-grid-title">Browse Solutions</h2>
+            <div class="category-header-line"></div>
+        </div>
+
+        {% if problems %}
+            <div class="category-problems-grid-modern">
+                {% for problem in problems %}
+                    <a href="{% url 'problem_detail' problem.name %}" class="category-problem-card-modern">
+                        <div class="card-modern-bg"></div>
+                        
+                        <div class="card-modern-icon">
+                            {% if "Hair Fall" in problem.name %}
+                                💇
+                            {% elif "Dandruff" in problem.name %}
+                                ❄️
+                            {% elif "Hair Growth" in problem.name %}
+                                🌱
+                            {% elif "Dry Hair" in problem.name %}
+                                🏜️
+                            {% elif "Split Ends" in problem.name %}
+                                ✂️
+                            {% elif "Hair Thinning" in problem.name %}
+                                📉
+                            {% elif "Scalp Infection" in problem.name %}
+                                🦠
+                            {% elif "Grey Hair" in problem.name %}
+                                🤍
+                            {% elif "Baldness" in problem.name %}
+                                👴
+                            {% elif "Excessive Hair Shedding" in problem.name %}
+                                🍂
+                            {% elif "Acne" in problem.name or "Pimples" in problem.name %}
+                                🧴
+                            {% elif "Blackheads" in problem.name %}
+                                ⚫
+                            {% elif "Dull Skin" in problem.name %}
+                                😐
+                            {% elif "Dry Skin" in problem.name %}
+                                🏜️
+                            {% elif "Oily Skin" in problem.name %}
+                                💧
+                            {% elif "Rashes" in problem.name %}
+                                🌡️
+                            {% elif "Scars" in problem.name %}
+                                🩹
+                            {% elif "Skin Redness" in problem.name %}
+                                🔴
+                            {% elif "Sun Tan" in problem.name %}
+                                ☀️
+                            {% elif "Stretch Marks" in problem.name %}
+                                〰️
+                            {% elif "Irregular Periods" in problem.name %}
+                                🔄
+                            {% elif "Painful Period" in problem.name %}
+                                😣
+                            {% elif "Menstrual Cramps" in problem.name %}
+                                ⚡
+                            {% elif "Heavy Periods" in problem.name %}
+                                🩸
+                            {% elif "White Discharge" in problem.name %}
+                                💧
+                            {% elif "Hormonal Imbalance" in problem.name %}
+                                ⚖️
+                            {% elif "PCOS Symptoms" in problem.name %}
+                                🧬
+                            {% elif "Menopause Symptoms" in problem.name %}
+                                🌙
+                            {% elif "Mood Swings" in problem.name %}
+                                🎭
+                            {% elif "Back Pain During Periods" in problem.name %}
+                                🦴
+                            {% elif "Weak Immunity" in problem.name %}
+                                🛡️
+                            {% elif "Frequent Illness" in problem.name %}
+                                🤒
+                            {% elif "Low Energy" in problem.name %}
+                                🔋
+                            {% elif "Fatigue" in problem.name %}
+                                😴
+                            {% elif "Tiredness" in problem.name %}
+                                🥱
+                            {% elif "Weakness After Illness" in problem.name %}
+                                🩹
+                            {% elif "Seasonal Allergies" in problem.name %}
+                                🤧
+                            {% elif "Poor Stamina" in problem.name %}
+                                🏃‍♂️
+                            {% elif "Common Cold" in problem.name %}
+                                🤧
+                            {% elif "Seasonal Flu" in problem.name %}
+                                🤒
+                            {% elif "Runny Nose" in problem.name %}
+                                👃
+                            {% elif "Blocked Nose" in problem.name %}
+                                😮‍💨
+                            {% elif "Sneezing" in problem.name %}
+                                🤧
+                            {% elif "Dry Cough" in problem.name %}
+                                😷
+                            {% elif "Wet Cough" in problem.name %}
+                                🫁
+                            {% elif "Throat Pain" in problem.name %}
+                                🔥
+                            {% elif "Hoarseness of Voice" in problem.name %}
+                                🎤
+                            {% elif "Chills" in problem.name %}
+                                🥶
+                            {% elif "Eye Strain" in problem.name %}
+                                👀
+                            {% elif "Dry Eyes" in problem.name %}
+                                🫧
+                            {% elif "Burning Eyes" in problem.name %}
+                                🔥
+                            {% elif "Red Eyes" in problem.name %}
+                                🔴
+                            {% elif "Ear Pain" in problem.name and "Mild" in problem.name %}
+                                👂
+                            {% elif "Ear Blockage" in problem.name %}
+                                🎧
+                            {% elif "Nose Pain" in problem.name %}
+                                👃
+                            {% elif "Nose Bleeding" in problem.name %}
+                                🩸
+                            {% elif "Throat Infection" in problem.name %}
+                                🦠
+                            {% elif "Tonsil Irritation" in problem.name %}
+                                🫁
+                            {% elif "Indigestion" in problem.name %}
+                                🤢
+                            {% elif "Acidity" in problem.name %}
+                                🔥
+                            {% elif "Common Stomach Pain" in problem.name %}
+                                🤕
+                            {% elif "Bloating" in problem.name %}
+                                🎈
+                            {% elif "Abdominal Cramps" in problem.name %}
+                                ⚡
+                            {% elif "Loose Motion" in problem.name %}
+                                🚽
+                            {% elif "Vomiting" in problem.name %}
+                                🤮
+                            {% elif "Diarrhea" in problem.name %}
+                                💧
+                            {% elif "Nausea" in problem.name %}
+                                🤢
+                            {% elif "Stress" in problem.name %}
+                                😣
+                            {% elif "Anxiety" in problem.name %}
+                                😰
+                            {% elif "Mental Fatigue" in problem.name %}
+                                😴
+                            {% elif "Brain Fog" in problem.name %}
+                                🌫️
+                            {% elif "Poor Concentration" in problem.name %}
+                                🎯
+                            {% elif "Headache" in problem.name %}
+                                🤕
+                            {% elif "Migraine" in problem.name %}
+                                ⚡
+                            {% elif "Insomnia" in problem.name %}
+                                🌙
+                            {% elif "Sleep Disturbance" in problem.name %}
+                                🛌
+                            {% elif "Nervous Weakness" in problem.name %}
+                                🧠
+                            {% elif "Body Pain" in problem.name %}
+                                🤕
+                            {% elif "Muscle Stiffness" in problem.name %}
+                                💪
+                            {% elif "Swelling in Joints" in problem.name %}
+                                🦴
+                            {% elif "Elbow Pain" in problem.name %}
+                                🦾
+                            {% elif "Back Pain" in problem.name %}
+                                🧍‍♂️
+                            {% elif "Joint Pain" in problem.name %}
+                                🦴
+                            {% elif "Neck Pain" in problem.name %}
+                                🧑‍⚕️
+                            {% elif "Knee Pain" in problem.name %}
+                                🦵
+                            {% elif "Arthritis" in problem.name %}
+                                🦴
+                            {% elif "Frozen Shoulder" in problem.name %}
+                                🧊
+                            {% elif "Toothache" in problem.name %}
+                                🦷
+                            {% elif "Gum Pain" in problem.name %}
+                                😬
+                            {% elif "Bleeding Gums" in problem.name %}
+                                🩸
+                            {% elif "Mouth Ulcers" in problem.name %}
+                                😣
+                            {% elif "Bad Breath" in problem.name %}
+                                😮‍💨
+                            {% elif "Oral Infections" in problem.name and "Mild" in problem.name %}
+                                🦠
+                            {% else %}
+                                🌿
+                            {% endif %}
+                        </div>
+
+                        <div class="card-modern-body">
+                            <h3 class="card-modern-title">{{ problem.name }}</h3>
+                            <p class="card-modern-description">{{ problem.short_description|truncatewords:8 }}</p>
+                        </div>
+
+                        <div class="card-modern-arrow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+
+                        <div class="card-modern-hover-glow"></div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="category-empty-state">
+                <div class="empty-state-icon">🌿</div>
+                <h3>No Solutions Available</h3>
+                <p>Check back soon for wellness solutions</p>
+                <a href="{% url 'home' %}" class="empty-state-link">Return Home</a>
+            </div>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

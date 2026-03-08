@@ -1,0 +1,755 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  /* ==================== RESET & BASE STYLES ==================== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* ==================== HERO SECTION - FULL WIDTH ==================== */
+  .problem-detail-header {
+    background: linear-gradient(135deg, #1f8f4d 0%, #2ba860 100%);
+    padding: 80px 20px;
+    width: 100%;
+    text-align: center;
+    overflow-x: hidden;
+  }
+
+  .problem-detail-header-container {
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .problem-detail-header h1 {
+    font-size: 3rem;
+    color: white;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .problem-detail-header p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 15px 0 0 0;
+    font-weight: 400;
+  }
+
+  /* ==================== CONTAINER ==================== */
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  /* ==================== MAIN CONTENT WRAPPER ==================== */
+  .problem-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* ==================== PROBLEM GRID ==================== */
+  .problem-info-section {
+    margin-bottom: 60px;
+  }
+
+  .problem-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  /* ==================== PROBLEM CARD ==================== */
+  .info-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .info-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+  }
+
+  .info-card h2 {
+    font-size: 1.4rem;
+    color: #1f8f4d;
+    margin: 0 0 15px 0;
+    font-weight: 700;
+  }
+
+  .info-card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.7;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* ==================== REMEDIES SECTION ==================== */
+  .remedies-section {
+    background: #f9f9f9;
+    padding: 60px 20px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .remedies-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0;
+  }
+
+  .remedies-container {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .remedies-section-title {
+    font-size: 2rem;
+    color: #1f8f4d;
+    margin: 0 0 40px 0;
+    font-weight: 700;
+  }
+
+  .remedies-grid {
+    display: block;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* ==================== REMEDY CARD ==================== */
+  .remedy-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    animation: remedyCardFadeIn 0.6s ease-out backwards;
+  }
+
+  .remedy-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .remedy-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .remedy-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  .remedy-card:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+
+  .remedy-card:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+
+  .remedy-card:nth-child(n+6) {
+    animation-delay: calc(0.1s * (var(--card-index, 6) - 5));
+  }
+
+  @keyframes remedyCardFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .remedy-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .remedy-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+  }
+
+  /* ==================== REMEDY CARD TITLE ==================== */
+  .remedy-card-title {
+    font-size: 1.5rem;
+    color: #1f8f4d;
+    margin: 0 0 12px 0;
+    font-weight: 700;
+  }
+
+  /* ==================== REMEDY CARD DESCRIPTION ==================== */
+  .remedy-card-description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 18px 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* ==================== FREQUENCY BADGE ==================== */
+  .remedy-frequency {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0f8f5;
+    color: #1f8f4d;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    width: fit-content;
+  }
+
+  /* ==================== VIEW RECIPE BUTTON ==================== */
+  .view-recipe-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #1f8f4d 0%, #2ba860 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin-top: 18px;
+    box-sizing: border-box;
+  }
+
+  .view-recipe-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(31, 143, 77, 0.35);
+    background: linear-gradient(135deg, #2ba860 0%, #1f8f4d 100%);
+  }
+
+  .view-recipe-btn:active {
+    transform: scale(0.98);
+  }
+
+  .recipe-btn-icon {
+    font-size: 0.8rem;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    flex-shrink: 0;
+  }
+
+  .view-recipe-btn.expanded .recipe-btn-icon {
+    transform: rotate(180deg);
+  }
+
+  /* ==================== RECIPE DETAILS (EXPANDABLE) ==================== */
+  .recipe-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, opacity 0.4s ease, padding 0.5s ease-out;
+    opacity: 0;
+    visibility: hidden;
+    padding: 0;
+  }
+
+  .recipe-details.expanded {
+    max-height: 2000px;
+    opacity: 1;
+    visibility: visible;
+    padding: 20px 0 0 0;
+  }
+
+  .recipe-content {
+    margin-top: 0;
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .recipe-section {
+    margin-bottom: 20px;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .recipe-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .recipe-section h4 {
+    font-size: 1.05rem;
+    color: #1f8f4d;
+    margin: 0 0 15px 0;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .recipe-section p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+  }
+
+  /* ==================== INGREDIENTS LIST STYLING ==================== */
+  .recipe-section:nth-child(1) ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .recipe-section:nth-child(1) li {
+    margin-bottom: 12px;
+    padding-left: 24px;
+    position: relative;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .recipe-section:nth-child(1) li:last-child {
+    margin-bottom: 0;
+  }
+
+  .recipe-section:nth-child(1) li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: #44c34a;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  /* ==================== PREPARATION/INSTRUCTIONS NUMBERING ==================== */
+  .recipe-section:nth-child(2) ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding: 0;
+    margin: 0;
+  }
+
+  .recipe-section:nth-child(2) li {
+    counter-increment: step-counter;
+    margin-bottom: 16px;
+    padding-left: 32px;
+    position: relative;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .recipe-section:nth-child(2) li:last-child {
+    margin-bottom: 0;
+  }
+
+  .recipe-section:nth-child(2) li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #1f8f4d 0%, #2ba860 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.85rem;
+  }
+
+  /* ==================== WHY IT WORKS - CHECK MARKS ==================== */
+  .recipe-section:nth-child(5) ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .recipe-section:nth-child(5) li {
+    margin-bottom: 12px;
+    padding-left: 28px;
+    position: relative;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .recipe-section:nth-child(5) li:last-child {
+    margin-bottom: 0;
+  }
+
+  .recipe-section:nth-child(5) li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #2ba860;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  /* ==================== PRECAUTIONS WARNING BOX ==================== */
+  .recipe-section:nth-child(6) {
+    background: #fff8e6;
+    border-left: 5px solid #f5b942;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .recipe-section:nth-child(6) h4 {
+    color: #d97706;
+    margin-bottom: 12px;
+  }
+
+  .recipe-section:nth-child(6) ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .recipe-section:nth-child(6) li {
+    margin-bottom: 10px;
+    padding-left: 24px;
+    position: relative;
+    font-size: 0.9rem;
+    color: #b45309;
+    line-height: 1.6;
+  }
+
+  .recipe-section:nth-child(6) li:last-child {
+    margin-bottom: 0;
+  }
+
+  .recipe-section:nth-child(6) li::before {
+    content: "⚠";
+    position: absolute;
+    left: 0;
+    color: #f59e0b;
+    font-size: 1rem;
+  }
+
+  .recipe-section:nth-child(6) p {
+    color: #b45309;
+  }
+
+  /* ==================== LIFESTYLE TIPS ==================== */
+  .recipe-section:nth-child(8) ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .recipe-section:nth-child(8) li {
+    margin-bottom: 12px;
+    padding-left: 24px;
+    position: relative;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .recipe-section:nth-child(8) li:last-child {
+    margin-bottom: 0;
+  }
+
+  .recipe-section:nth-child(8) li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #44c34a;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  /* ==================== NO REMEDIES STATE ==================== */
+  .no-remedies {
+    text-align: center;
+    padding: 60px 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    color: #999;
+    font-size: 1rem;
+    overflow-x: hidden;
+  }
+
+  /* ==================== RESPONSIVE DESIGN ==================== */
+  @media (max-width: 768px) {
+    .problem-detail-header {
+      padding: 50px 20px;
+    }
+
+    .problem-detail-header h1 {
+      font-size: 2rem;
+    }
+
+    .problem-detail-header p {
+      font-size: 0.95rem;
+    }
+
+    .problem-content-wrapper {
+      padding: 40px 20px;
+    }
+
+    .problem-info-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .remedies-section {
+      padding: 40px 20px;
+    }
+
+    .remedies-section-title {
+      font-size: 1.6rem;
+      margin-bottom: 30px;
+    }
+
+    .remedy-card {
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .remedy-card-title {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .problem-detail-header {
+      padding: 40px 15px;
+    }
+
+    .problem-detail-header h1 {
+      font-size: 1.5rem;
+    }
+
+    .problem-detail-header p {
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    .problem-content-wrapper {
+      padding: 30px 15px;
+    }
+
+    .problem-info-section {
+      margin-bottom: 40px;
+    }
+
+    .problem-info-grid {
+      gap: 15px;
+    }
+
+    .info-card {
+      padding: 20px;
+    }
+
+    .info-card h2 {
+      font-size: 1.1rem;
+    }
+
+    .info-card p {
+      font-size: 0.9rem;
+    }
+
+    .remedies-section {
+      padding: 30px 15px;
+    }
+
+    .remedies-section-title {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+
+    .remedy-card {
+      padding: 18px;
+      margin-bottom: 15px;
+    }
+
+    .remedy-card-title {
+      font-size: 1.1rem;
+    }
+
+    .remedy-card-description {
+      font-size: 0.9rem;
+    }
+
+    .view-recipe-btn {
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      margin-top: 15px;
+    }
+
+    .recipe-section h4 {
+      font-size: 0.95rem;
+    }
+
+    .recipe-section p {
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+<!-- PROBLEM DETAIL HEADER (Simple & Clean) -->
+<div class="problem-detail-header">
+    <div class="problem-detail-header-container">
+        <h1>{{ problem.name }}</h1>
+        <p>Time-tested Ayurvedic solutions for your health and wellness</p>
+    </div>
+</div>
+
+<!-- MAIN CONTENT WRAPPER -->
+<div class="problem-content-wrapper">
+    <!-- ABOUT & SYMPTOMS SECTION -->
+    <section class="problem-info-section">
+        <div class="problem-info-grid">
+            <!-- About Card -->
+            <div class="info-card about-card">
+                <h2>🧠 About This Problem</h2>
+                <p>{{ problem.about_problem }}</p>
+            </div>
+
+            <!-- Symptoms Card -->
+            <div class="info-card symptoms-card">
+                <h2>⚠️ Common Symptoms</h2>
+                <p>{{ problem.symptoms|linebreaks }}</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- REMEDIES SECTION (Full Width) -->
+<section class="remedies-section" id="remedies-section">
+    <div class="remedies-wrapper">
+        <div class="remedies-container">
+            <h2 class="remedies-section-title">Ayurvedic Remedies</h2>
+
+            {% if remedies %}
+                <div class="remedies-grid">
+                    {% for remedy in remedies %}
+                    <div class="remedy-card">
+                        <!-- Remedy Title -->
+                        <h3 class="remedy-card-title">{{ remedy.remedy_name }}</h3>
+
+                        <!-- Remedy Description -->
+                        <p class="remedy-card-description">{{ remedy.ingredients|truncatewords:12 }}</p>
+
+                        <!-- Frequency Badge -->
+                        <div class="remedy-frequency">
+                            <span>⏱</span>
+                            <span>{{ remedy.frequency }}</span>
+                        </div>
+
+                        <!-- View Recipe Button -->
+                        <button class="view-recipe-btn" onclick="toggleRecipe({{ forloop.counter }})">
+                            <span>View Full Recipe</span>
+                            <span class="recipe-btn-icon">▼</span>
+                        </button>
+
+                        <!-- Expandable Recipe Details -->
+                        <div class="recipe-details" id="recipe-{{ forloop.counter }}">
+                            <div class="recipe-content">
+                                <div class="recipe-section">
+                                    <h4>🧂 Ingredients Required</h4>
+                                    <p>{{ remedy.ingredients|linebreaks }}</p>
+                                </div>
+
+                                <div class="recipe-section">
+                                    <h4>🥣 Preparation Method</h4>
+                                    <p>{{ remedy.preparation_steps|linebreaks }}</p>
+                                </div>
+
+                                <div class="recipe-section">
+                                    <h4>🧴 How To Use</h4>
+                                    <p>{{ remedy.how_to_use|linebreaks }}</p>
+                                </div>
+
+                                {% if remedy.results_time %}
+                                <div class="recipe-section">
+                                    <h4>⏳ When Will You See Results?</h4>
+                                    <p>{{ remedy.results_time|linebreaks }}</p>
+                                </div>
+                                {% endif %}
+
+                                <div class="recipe-section">
+                                    <h4>🌱 Why This Remedy Works</h4>
+                                    <p>{{ remedy.why_it_works|linebreaks }}</p>
+                                </div>
+
+                                <div class="recipe-section">
+                                    <h4>⚠️ Precautions & Safety Tips</h4>
+                                    <p>{{ remedy.precautions|linebreaks }}</p>
+                                </div>
+
+                                {% if remedy.who_should_not_use %}
+                                <div class="recipe-section">
+                                    <h4>🚫 Who Should NOT Use This?</h4>
+                                    <p>{{ remedy.who_should_not_use|linebreaks }}</p>
+                                </div>
+                                {% endif %}
+
+                                {% if remedy.lifestyle_tips %}
+                                <div class="recipe-section">
+                                    <h4>🧘 Lifestyle Tips for Faster Results</h4>
+                                    <p>{{ remedy.lifestyle_tips|linebreaks }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-remedies">
+                    <p>No remedies available yet for this problem.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<script>
+function toggleRecipe(index) {
+    const recipeDetails = document.getElementById('recipe-' + index);
+    const button = recipeDetails.previousElementSibling;
+    
+    recipeDetails.classList.toggle('expanded');
+    button.classList.toggle('expanded');
+}
+</script>
+
+{% endblock %}

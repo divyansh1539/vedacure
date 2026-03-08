@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="services-section">
+    <div class="services-section-wrapper">
+
+        <div class="services-section-header">
+            <h1 class="services-section-title">Browse by Category</h1>
+            <p class="services-section-subtitle">Discover natural remedies organized by health concerns</p>
+        </div>
+
+        <div class="services-grid" id="services-grid">
+
+            <!-- 6 visible by default -->
+            <a href="{% url 'category_detail' 'haircare-health' %}" class="service-card">
+                <div class="service-card-icon haircare">💇</div>
+                <h3 class="service-card-title">Haircare Health</h3>
+                <p class="service-card-description">Natural solutions for hair fall, dandruff, and scalp wellness</p>
+            </a>
+
+            <a href="{% url 'category_detail' 'skincare-health' %}" class="service-card">
+                <div class="service-card-icon skincare">🧴</div>
+                <h3 class="service-card-title">Skincare Health</h3>
+                <p class="service-card-description">Ayurvedic solutions for healthy, glowing skin</p>
+            </a>
+
+            <a href="{% url 'category_detail' 'womens-health' %}" class="service-card">
+                <div class="service-card-icon womens">👩</div>
+                <h3 class="service-card-title">Women's Health</h3>
+                <p class="service-card-description">Support for hormonal balance and menstrual wellness</p>
+            </a>
+
+            <a href="{% url 'category_detail' 'immunity-wellness' %}" class="service-card">
+                <div class="service-card-icon immunity">🛡️</div>
+                <h3 class="service-card-title">Immunity & Weakness</h3>
+                <p class="service-card-description">Boost your immune system naturally</p>
+            </a>
+
+            <a href="{% url 'category_detail' 'cold-cough-fever' %}" class="service-card">
+                <div class="service-card-icon cold">🤒</div>
+                <h3 class="service-card-title">Cold, Cough & Fever</h3>
+                <p class="service-card-description">Comforting care for seasonal colds and congestion</p>
+            </a>
+
+            <a href="{% url 'category_detail' 'ent-health' %}" class="service-card">
+                <div class="service-card-icon ent">👂</div>
+                <h3 class="service-card-title">ENT Health</h3>
+                <p class="service-card-description">Relief for ear, nose, and throat discomforts</p>
+            </a>
+
+            <!-- Hidden initially, shown on "Show More" -->
+            <a href="{% url 'category_detail' 'digestive-health' %}" class="service-card hidden-card">
+                <div class="service-card-icon digestive">🍎</div>
+                <h3 class="service-card-title">Digestive Health</h3>
+                <p class="service-card-description">Natural remedies for digestive wellness and gut health</p>
+            </a>
+
+            <a href="{% url 'category_detail' 'mental-wellness' %}" class="service-card hidden-card">
+                <div class="service-card-icon mental">🧠</div>
+                <h3 class="service-card-title">Mental Health</h3>
+                <p class="service-card-description">Remedies for stress, anxiety, and mental clarity</p>
+            </a>
+
+            <a href="{% url 'category_detail' 'pain-relief' %}" class="service-card hidden-card">
+                <div class="service-card-icon pain">❤️</div>
+                <h3 class="service-card-title">Pain Relief</h3>
+                <p class="service-card-description">Holistic approaches to managing pain</p>
+            </a>
+
+            <a href="{% url 'category_detail' 'respiratory-health' %}" class="service-card hidden-card">
+                <div class="service-card-icon respiratory">🦷</div>
+                <h3 class="service-card-title">Oral & Dental Problems</h3>
+                <p class="service-card-description">Natural relief for breathing and respiratory issues</p>
+            </a>
+
+        </div>
+
+        <div class="services-button-container">
+            <button class="show-toggle-btn" id="show-more-btn" type="button">
+                Show More
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    (function () {
+        const button = document.getElementById('show-more-btn');
+        const extraCards = document.querySelectorAll('.services-grid .hidden-card');
+        if (!button || !extraCards.length) return;
+
+        let expanded = false;
+
+        button.addEventListener('click', function () {
+            expanded = !expanded;
+            extraCards.forEach(function (card) {
+                card.classList.toggle('hidden-card--visible', expanded);
+            });
+            button.textContent = expanded ? 'Show Less' : 'Show More';
+        });
+    })();
+</script>
+
+{% endblock %}

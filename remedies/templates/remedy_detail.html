@@ -3,122 +3,448 @@
 
 {% block content %}
 
-<section class="remedy-section">
+<style>
+  /* ==================== GLOBAL STYLES ==================== */
+  :root {
+    --primary-green: #1f8f4d;
+    --secondary-green: #2ba860;
+    --light-green: #e8f5e9;
+    --bg-gradient: linear-gradient(135deg, #f5f9f7 0%, #f0f8f5 100%);
+    --card-shadow: 0 4px 20px rgba(31, 143, 77, 0.08);
+    --card-shadow-hover: 0 12px 40px rgba(31, 143, 77, 0.15);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-    <h1 class="remedy-title">
-        Explore the <span>Certified Traditional</span><br>
-        remedies for the <strong>Vedacure</strong>
-    </h1>
+  /* ==================== HERO SECTION ==================== */
+  .services-hero {
+    background: linear-gradient(135deg, #1f8f4d 0%, #2ba860 100%);
+    color: white;
+    padding: 90px 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(31, 143, 77, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
 
-    <p class="remedy-subtitle">
-        Discover trusted home remedies with smart suggestions,
-        guided by tradition and enhanced with AI.
-    </p>
+  .services-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+  }
 
-    <div class="remedy-wrapper">
+  .services-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
 
-    <button class="arrow" onclick="slideLeft()">&#8592;</button>
+  .services-hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
 
-    <div class="remedy-viewport">
-        <div class="remedy-track" id="remedyTrack">
+  .services-hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+  }
 
-            <div class="remedy-card">
-                <div class="card-inner">
-                    <img src="{% static 'images/haircare.jpg' %}">
-                </div>
-                
-            </div>
-        
-            <div class="remedy-card">
-                <div class="card-inner">
-                    <img src="{% static 'images/skincare.jpg' %}">
-                </div>
-                
-            </div>
-        
-            <div class="remedy-card">
-                <div class="card-inner">
-                    <img src="{% static 'images/bodycare.jpg' %}">
-                </div>
-                
-            </div>
-        
-            <div class="remedy-card">
-                <div class="card-inner">
-                    <img src="{% static 'images/oral and dental.jpg' %}">
-                </div>
-                
-            </div>
-        
-            <div class="remedy-card">
-                <div class="card-inner">
-                    <img src="{% static 'images/womens-period-health.jpg.jpg' %}">
-                </div>
-                
-            </div>
-        
-            <div class="remedy-card">
-                <div class="card-inner">
-                    <img src="{% static 'digestive-health.jpg' %}">
-                </div>
-                
-            </div>
-        
-            <div class="remedy-card">
-                <div class="card-inner">
-                    <img src="{% static 'images/mental-and-nervous.jpg' %}">
-                </div>
-                
-            </div>
-        
-            <div class="remedy-card">
-                <div class="card-inner">
-                    <img src="{% static 'images/pains and acne.jpg' %}">
-                </div>
-                
-            </div>
-        
-            <div class="remedy-card">
-                <div class="card-inner">
-                    <img src="{% static 'images/ent health.jpg' %}">
-                </div>
-                
-            </div>
-        
-            <div class="remedy-card">
-                <div class="card-inner">
-                    <img src="{% static 'images/cold cough and fever.jpg' %}">
-                </div>
-                
-            </div>
-        
-        </div>
-        
+  /* ==================== MAIN SECTION ==================== */
+  .services-main {
+    background: var(--bg-gradient);
+    padding: 80px 20px;
+    min-height: 100vh;
+  }
+
+  .services-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .services-intro {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .services-intro h2 {
+    font-size: 2.5rem;
+    color: var(--primary-green);
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  .services-intro p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ==================== CATEGORY TABS ==================== */
+  .category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    padding: 0 10px;
+  }
+
+  .category-tab {
+    background: white;
+    color: var(--primary-green);
+    border: 2px solid #e0e0e0;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--card-shadow);
+  }
+
+  .category-tab:hover {
+    border-color: var(--primary-green);
+    color: white;
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .category-tab.active {
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+    color: white;
+    border-color: var(--primary-green);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  /* ==================== SERVICES GRID ==================== */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 35px;
+  }
+
+  /* ==================== SERVICE CARD ==================== */
+  .service-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-8px);
+  }
+
+  .service-card-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--light-green) 0%, #e0f2e9 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .service-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .service-card:hover .service-card-image img {
+    transform: scale(1.05);
+  }
+
+  .service-card-content {
+    padding: 35px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-card-title {
+    font-size: 1.6rem;
+    color: var(--primary-green);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .service-card-description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    flex-grow: 1;
+  }
+
+  /* ==================== REMEDY LIST ==================== */
+  .remedy-list {
+    margin-bottom: 25px;
+    flex-grow: 1;
+  }
+
+  .remedies-container {
+    background: var(--light-green);
+    border-radius: 10px;
+    padding: 20px;
+    max-height: 120px;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .remedies-container.collapsed {
+    max-height: 0;
+    padding: 0 20px;
+  }
+
+  .remedies-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .remedies-container li {
+    font-size: 0.9rem;
+    color: var(--primary-green);
+    padding: 8px 0;
+    font-weight: 500;
+  }
+
+  /* ==================== CTA BUTTON ==================== */
+  .toggle-remedies-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(31, 143, 77, 0.2);
+    text-align: center;
+    border: none;
+    cursor: pointer;
+  }
+
+  .toggle-remedies-btn:hover {
+    box-shadow: 0 8px 25px rgba(31, 143, 77, 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* ==================== NO SERVICES STATE ==================== */
+  .no-services {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+  }
+
+  .no-services-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+  }
+
+  .no-services h3 {
+    font-size: 1.8rem;
+    color: var(--primary-green);
+    margin-bottom: 10px;
+  }
+
+  .no-services p {
+    font-size: 1rem;
+    color: #888;
+  }
+
+  /* ==================== RESPONSIVE DESIGN ==================== */
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .services-hero-content h1 {
+      font-size: 2.5rem;
+    }
+
+    .services-intro h2 {
+      font-size: 2rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .category-tabs {
+      gap: 8px;
+    }
+
+    .category-tab {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+
+    .service-card-content {
+      padding: 25px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .services-hero {
+      padding: 60px 15px;
+    }
+
+    .services-hero-content h1 {
+      font-size: 2rem;
+    }
+
+    .services-intro {
+      margin-bottom: 40px;
+    }
+
+    .services-intro h2 {
+      font-size: 1.5rem;
+    }
+
+    .category-tabs {
+      margin-bottom: 30px;
+    }
+
+    .services-grid {
+      gap: 20px;
+    }
+
+    .service-card-image {
+      height: 180px;
+    }
+  }
+</style>
+
+<!-- Services Hero Section -->
+<section class="services-hero">
+    <div class="services-hero-content">
+        <h1>Explore Vedic Remedies</h1>
+        <p>Discover traditional Ayurvedic solutions organized by health categories</p>
     </div>
-
-    <button class="arrow" onclick="slideRight()">&#8594;</button>
-
-</div>
-
-
 </section>
 
-{% comment %} <script>
-let index = 0;
+<!-- Services Main Section -->
+<section class="services-main">
+    <div class="services-container">
+        <div class="services-intro">
+            <h2>Health Categories</h2>
+            <p>Browse through our comprehensive collection of time-tested remedies for various health concerns</p>
+        </div>
 
-function slideRight() {
-    const track = document.getElementById("remedyTrack");
-    index++;
-    if (index > 7) index = 0;
-    track.style.transform = `translateX(-${index * 33.33}%)`;
-}
+        <!-- Category Tabs -->
+        <div class="category-tabs" id="categoryTabs">
+            {% for category in categories %}
+            <button class="category-tab {% if forloop.first %}active{% endif %}" data-category="{{ category.slug }}">
+                {{ category.title }}
+            </button>
+            {% endfor %}
+        </div>
 
-function slideLeft() {
-    const track = document.getElementById("remedyTrack");
-    index--;
-    if (index < 0) index = 7;
-    track.style.transform = `translateX(-${index * 33.33}%)`;
-}
-</script> {% endcomment %}
+        <!-- Services Grid -->
+        <div class="services-grid" id="servicesGrid">
+            {% for category in categories %}
+            <div class="service-card" data-category="{{ category.slug }}" style="{% if not forloop.first %}display: none;{% endif %}">
+                <div class="service-card-image">
+                    <img src="{% static 'images/' %}{{ category.slug|slugify }}.jpg" alt="{{ category.title }}" onerror="this.src='{% static 'images/veda.jpg.png' %}'">
+                </div>
+                <div class="service-card-content">
+                    <h3 class="service-card-title">{{ category.title }}</h3>
+                    <p class="service-card-description">
+                        Explore traditional remedies and natural solutions for {{ category.title|lower }}
+                    </p>
+                    <div class="remedy-list">
+                        <div class="remedies-container collapsed" data-category="{{ category.slug }}">
+                            <ul>
+                                {% comment %} Placeholder remedies - will be populated dynamically or from data {% endcomment %}
+                                <li>Explore remedies in this category</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="{% url 'category_detail' category.slug %}" class="toggle-remedies-btn">
+                        View All Remedies
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-services">
+                <div class="no-services-icon">🌿</div>
+                <h3>No Categories Found</h3>
+                <p>Please check back soon for more remedies</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    // Handle category tab clicks
+    categoryTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const selectedCategory = this.getAttribute('data-category');
+
+            // Update active tab
+            categoryTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+
+            // Show/hide service cards
+            serviceCards.forEach(card => {
+                if (card.getAttribute('data-category') === selectedCategory) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Handle show more/less for remedies
+    const toggleButtons = document.querySelectorAll('.toggle-remedies-btn');
+    toggleButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const container = this.previousElementSibling.querySelector('.remedies-container');
+            
+            if (container.classList.contains('collapsed')) {
+                container.classList.remove('collapsed');
+                this.textContent = 'Show Less';
+            } else {
+                container.classList.add('collapsed');
+                this.textContent = 'Show More';
+            }
+        });
+    });
+});
+</script>
 
 {% endblock %}

@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="contact-hero">
+    <div class="contact-hero-content">
+        <span class="hero-tag">Get In Touch</span>
+        <h1>Connect With Our Wellness Experts</h1>
+        <p>Ready to embark on your journey to holistic health? Let's discuss how VedaCure can help harmonize your life.</p>
+    </div>
+</section>
+
+<section class="contact-main">
+    <div class="contact-container">
+        <!-- Contact Form -->
+        <div class="contact-form-wrapper">
+            <h2>Send us a Message</h2>
+            <form method="POST" action="{% url 'contact' %}" class="contact-form">
+                {% csrf_token %}
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullname">First Name *</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="John" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname">Last Name *</label>
+                        <input type="text" id="lastname" name="lastname" placeholder="Doe" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Company/Organization</label>
+                    <input type="text" id="company" name="company" placeholder="Your Company">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Tell Us About Your Health Goals *</label>
+                    <textarea id="message" name="message" placeholder="Describe your wellness concerns, goals, and what brings you to VedaCure..." rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Inquiry</button>
+            </form>
+        </div>
+
+        <!-- Contact Info Sidebar -->
+        <div class="contact-sidebar">
+            <!-- Contact Info Cards -->
+            <div class="info-card">
+                <div class="info-icon">✉️</div>
+                <h4>Email</h4>
+                <p>We respond within 24 hours</p>
+                <a href="mailto:hello@vedacure.com" class="info-link">hello@vedacure.com</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📞</div>
+                <h4>Phone</h4>
+                <p>Mon-Fri 9:30 AM - 6 PM IST</p>
+                <a href="tel:+917209-0345" class="info-link">+91-7209-0345</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📍</div>
+                <h4>Location</h4>
+                <p>Visit Our Sanctuary</p>
+                <span class="info-link">Rishikesh, India</span>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🕐</div>
+                <h4>Hours</h4>
+                <p>Consultation Available</p>
+                <span class="info-link">Mon-Sat, 8 AM - 7 PM</span>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="contact-stats-box">
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-text">Happy Clients</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-text">Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="faq-wrapper">
+        <h2>Frequently Asked Questions</h2>
+        <p class="faq-intro">Find answers to common questions about our wellness services</p>
+        
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h4>How long does a wellness consultation take?</h4>
+                <p>Initial consultations typically take 30-60 minutes. We perform a comprehensive Dosha analysis and create a personalized wellness plan tailored to your unique constitution.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Do you offer online consultations?</h4>
+                <p>Yes! We offer secure video consultations for clients worldwide. Our remote sessions are just as effective as in-person, allowing you to receive expert guidance from anywhere.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What conditions do you treat?</h4>
+                <p>We address chronic conditions, stress management, hormonal imbalances, digestive issues, skin problems, and preventative wellness using authentic Ayurvedic treatments.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How soon will I see results?</h4>
+                <p>Most clients notice improvements within 2-4 weeks. However, deeper healing typically takes 8-12 weeks depending on your condition and adherence to recommendations.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

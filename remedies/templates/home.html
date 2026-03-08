@@ -3,25 +3,50 @@
 
 {% block content %}
 
-<section class="page hero" id="home">
-    <div class="hero-overlay"></div>
+<section class="page hero home-hero" id="home">
+    <div class="hero-content home-hero-content">
+        <span class="home-tag">Ancient Wisdom, Modern Wellness</span>
 
-    <div class="hero-content">
-        <span class="tag">VedaCure +</span>
+        <div class="home-heading">
+            <h1>Discover the Power of<br><span class="home-green-text">Natural Ayurvedic Healing</span></h1>
+        </div>
 
-        <h1>
-            Traditional Remedies<br>
-            for Modern Living
-        </h1>
-
-        <p>
-            Discover trusted home remedies with smart suggestions,
-            guided by tradition and enhanced with AI.
+        <p class="home-hero-subtitle">
+            Explore time-tested homemade remedies and Ayurvedic solutions for holistic health and wellness. Natural, safe, and effective treatments passed down through generations.
         </p>
 
-        <div class="hero-buttons">
-            <a href="#remedies" class="btn primary">Explore</a>
-            <a href="#ai" class="btn secondary">Dive In</a>
+        <div class="hero-buttons home-hero-buttons">
+            <a href="{% url 'ai_suggest' %}" class="btn home-btn-primary">AI Suggest</a>
+            <a href="{% url 'services' %}" class="btn home-btn-secondary">Browse Categories</a>
+        </div>
+    </div>
+
+    <!-- Parallax floating elements -->
+    <div class="parallax-leaf leaf-1">🍃</div>
+    <div class="parallax-leaf leaf-2">🌿</div>
+    <div class="parallax-leaf leaf-3">🍂</div>
+    <div class="parallax-leaf leaf-4">🌱</div>
+</section>
+
+<!-- Features Section -->
+<section class="features-intro home-features">
+    <div class="features-wrapper home-features-wrapper">
+        <div class="feature-box home-feature-box">
+            <div class="home-feature-icon">🍃</div>
+            <h3>100% Natural</h3>
+            <p>All remedies use pure, natural ingredients from nature</p>
+        </div>
+
+        <div class="feature-box home-feature-box">
+            <div class="home-feature-icon">❤️</div>
+            <h3>Time-Tested</h3>
+            <p>Remedies proven effective over thousands of years</p>
+        </div>
+
+        <div class="feature-box home-feature-box">
+            <div class="home-feature-icon">✨</div>
+            <h3>Holistic Care</h3>
+            <p>Treating the root cause, not just symptoms</p>
         </div>
     </div>
 </section>
