@@ -1,8 +1,86 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="hero">
-    <h1>AI Suggest</h1>
-    <p>AI based remedies coming soon 🔥</p>
-</section>
+
+<div class="ai-chat-page">
+
+    <div class="ai-header">
+        <h1>VedaBOT AI</h1>
+        <p>Ask about natural remedies, herbs, or health tips 🌿</p>
+    </div>
+
+    <div class="ai-chat-container">
+
+        <div id="aiChatBody" class="ai-chat-body">
+            <div class="bot-msg">
+                Hello 👋 I am VedaBOT. Ask me anything about remedies.
+            </div>
+        </div>
+
+        <div class="ai-chat-footer">
+            <input type="text" id="aiInput" placeholder="Ask your question...">
+            <button id="aiSend">Send</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const input = document.getElementById("aiInput");
+const send = document.getElementById("aiSend");
+const chat = document.getElementById("aiChatBody");
+
+function sendMsg(){
+
+    const msg = input.value.trim();
+    if(!msg) return;
+
+    const user = document.createElement("div");
+    user.className = "user-msg";
+    user.innerText = msg;
+    chat.appendChild(user);
+
+    input.value = "";
+
+    // typing bubble
+    const typing = document.createElement("div");
+    typing.className = "typing-bubble";
+    typing.innerHTML = "<span></span><span></span><span></span>";
+    chat.appendChild(typing);
+
+    fetch("/vedabot/",{
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({message:msg})
+    })
+    .then(res=>res.json())
+    .then(data=>{
+
+        setTimeout(()=>{
+
+            typing.remove();
+
+            const bot = document.createElement("div");
+            bot.className = "bot-msg";
+            bot.innerText = data.reply;
+            chat.appendChild(bot);
+
+            chat.scrollTop = chat.scrollHeight;
+
+        },1200);
+
+    });
+
+}
+
+send.onclick = sendMsg;
+
+input.addEventListener("keypress",function(e){
+    if(e.key==="Enter") sendMsg();
+});
+
+</script>
+
 {% endblock %}

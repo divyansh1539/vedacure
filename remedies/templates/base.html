@@ -23,7 +23,10 @@
         <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul>
 
-    <a href="javascript:void(0)" class="bot-btn" id="openBot">VedaBOT</a>
+    <div class="nav-actions">
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        <a href="javascript:void(0)" class="bot-btn" id="openBot">VedaBOT</a>
+    </div>
 </nav>
 
 <!-- ================= PAGE CONTENT ================= -->
@@ -52,58 +55,80 @@
 
 <!-- ================= BOT SCRIPT ================= -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const openBot = document.getElementById("openBot");
-    const closeBot = document.getElementById("closeBot");
-    const chatBox = document.getElementById("chatBox");
-    const sendBtn = document.getElementById("sendBtn");
-    const userInput = document.getElementById("userInput");
-    const chatBody = document.getElementById("chatBody");
-
-    openBot.onclick = () => chatBox.style.display = "flex";
-    closeBot.onclick = () => chatBox.style.display = "none";
-
-    function sendMessage() {
-        const msg = userInput.value.trim();
-        if (!msg) return;
-
-        const userDiv = document.createElement("div");
-        userDiv.className = "user-msg";
-        userDiv.innerText = msg;
-        chatBody.appendChild(userDiv);
-
-        userInput.value = "";
-        chatBody.scrollTop = chatBody.scrollHeight;
-
-        fetch("/vedabot/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: msg }),
-        })
-        .then(res => res.json())
-        .then(data => {
-            const botDiv = document.createElement("div");
-            botDiv.className = "bot-msg";
-            botDiv.innerText = data.reply;
-            chatBody.appendChild(botDiv);
+    document.addEventListener("DOMContentLoaded", function () {
+    
+        const openBot = document.getElementById("openBot");
+        const closeBot = document.getElementById("closeBot");
+        const chatBox = document.getElementById("chatBox");
+        const sendBtn = document.getElementById("sendBtn");
+        const userInput = document.getElementById("userInput");
+        const chatBody = document.getElementById("chatBody");
+    
+        openBot.onclick = () => chatBox.style.display = "flex";
+        closeBot.onclick = () => chatBox.style.display = "none";
+    
+        function sendMessage() {
+    
+            const msg = userInput.value.trim();
+            if (!msg) return;
+    
+            const userDiv = document.createElement("div");
+            userDiv.className = "user-msg";
+            userDiv.innerText = msg;
+            chatBody.appendChild(userDiv);
+    
+            userInput.value = "";
             chatBody.scrollTop = chatBody.scrollHeight;
-        })
-        .catch(() => {
-            const botDiv = document.createElement("div");
-            botDiv.className = "bot-msg";
-            botDiv.innerText = "Something went wrong.";
-            chatBody.appendChild(botDiv);
+    
+            // typing bubble
+            const typing = document.createElement("div");
+            typing.className = "typing-bubble";
+            typing.innerHTML = "<span></span><span></span><span></span>";
+            chatBody.appendChild(typing);
+    
+            fetch("/vedabot/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: msg }),
+            })
+            .then(res => res.json())
+            .then(data => {
+    
+                setTimeout(() => {
+    
+                    typing.remove();
+    
+                    const botDiv = document.createElement("div");
+                    botDiv.className = "bot-msg";
+                    botDiv.innerText = data.reply;
+    
+                    chatBody.appendChild(botDiv);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+    
+                }, 1200);
+    
+            })
+            .catch(() => {
+    
+                typing.remove();
+    
+                const botDiv = document.createElement("div");
+                botDiv.className = "bot-msg";
+                botDiv.innerText = "Something went wrong.";
+    
+                chatBody.appendChild(botDiv);
+    
+            });
+        }
+    
+        sendBtn.onclick = sendMessage;
+    
+        userInput.addEventListener("keypress", e => {
+            if (e.key === "Enter") sendMessage();
         });
-    }
-
-    sendBtn.onclick = sendMessage;
-    userInput.addEventListener("keypress", e => {
-        if (e.key === "Enter") sendMessage();
+    
     });
-});
-</script>
-
+    </script>
 <script src="{% static 'main.js' %}"></script>
 <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
 <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>

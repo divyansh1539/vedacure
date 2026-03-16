@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'remedies.middleware.AuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'vedic_remedies.urls'
@@ -131,8 +132,19 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-print("API KEY:", os.getenv("OPENAI_API_KEY"))
+print("Gemini Key:", GEMINI_API_KEY)
+print("ENV PATH:", BASE_DIR / ".env")
+
+# ================= EMAIL CONFIGURATION =================
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'vedacureofficial@gmail.com'
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")
+DEFAULT_FROM_EMAIL = 'vedacureofficial@gmail.com'
+
 
 
