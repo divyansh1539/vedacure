@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 # ================= CATEGORY =================
@@ -31,7 +32,6 @@ class Problem(models.Model):
 
 
 # ================= REMEDY =================
-# ================= REMEDY =================
 class Remedy(models.Model):
     problem = models.ForeignKey(
         Problem,
@@ -53,7 +53,6 @@ class Remedy(models.Model):
     who_should_not_use = models.TextField(blank=True)
     lifestyle_tips = models.TextField(blank=True)
 
-    # ✅ ADD THIS PART (VERY IMPORTANT)
     class Meta:
         unique_together = ("problem", "remedy_name")
 

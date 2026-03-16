@@ -86,10 +86,57 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    /* ================= BLOG COMING SOON MODAL ================= */
+    const blogModal = document.getElementById("blog-coming-soon-modal");
+    const blogReadMoreLinks = document.querySelectorAll(".blog-read-more");
+    const blogModalClose = document.querySelector(".blog-modal-close");
+    const blogModalButton = document.querySelector(".blog-modal-button");
+    const blogModalOverlay = document.querySelector(".blog-modal-overlay");
+
+    function openBlogModal() {
+        blogModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeBlogModal() {
+        blogModal.classList.remove("active");
+        document.body.style.overflow = "auto";
+    }
+
+    // Open modal on "Read Article" link click
+    blogReadMoreLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            openBlogModal();
+        });
+    });
+
+    // Close modal on close button click
+    if (blogModalClose) {
+        blogModalClose.addEventListener("click", closeBlogModal);
+    }
+
+    // Close modal on "Got It" button click
+    if (blogModalButton) {
+        blogModalButton.addEventListener("click", closeBlogModal);
+    }
+
+    // Close modal on overlay click
+    if (blogModalOverlay) {
+        blogModalOverlay.addEventListener("click", closeBlogModal);
+    }
+
+    // Close modal on Escape key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && blogModal && blogModal.classList.contains("active")) {
+            closeBlogModal();
+        }
+    });
+
     /* ================= FULL PAGE SCROLL ================= */
     const pages = [
         "/", 
-        "/remedies/", 
+        "/services/",
         "/ai/", 
         "/about/", 
         "/blog/", 

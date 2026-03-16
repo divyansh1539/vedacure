@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -17,7 +18,7 @@
         <div class="blog-grid">
             <!-- Blog Post 1 -->
             <article class="blog-card">
-                <div class="blog-image" style="background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);"></div>
+                <div class="blog-image" style="background-image: url('{% static 'images/blog/dosha.jpg' %}');"></div>
                 <div class="blog-content">
                     <div class="blog-meta">
                         <span class="blog-date">Mar 1, 2026</span>
@@ -25,13 +26,13 @@
                     </div>
                     <h3>Understanding Your Dosha</h3>
                     <p>Learn how to identify your unique Ayurvedic constitution and how it influences your health, habits, and lifestyle choices for optimal wellness.</p>
-                    <a href="#" class="blog-link">Read Article →</a>
+                    <a href="#" class="blog-link blog-read-more">Read Article →</a>
                 </div>
             </article>
 
             <!-- Blog Post 2 -->
             <article class="blog-card">
-                <div class="blog-image" style="background: linear-gradient(135deg, #2e7d32 0%, #44c34a 100%);"></div>
+                <div class="blog-image" style="background-image: url('{% static 'images/blog/herbs.jpg' %}');"></div>
                 <div class="blog-content">
                     <div class="blog-meta">
                         <span class="blog-date">Feb 28, 2026</span>
@@ -39,13 +40,13 @@
                     </div>
                     <h3>5 Powerful Ayurvedic Herbs</h3>
                     <p>Explore the ancient power of turmeric, ashwagandha, and other herbs that strengthen your immune system naturally without side effects.</p>
-                    <a href="#" class="blog-link">Read Article →</a>
+                    <a href="#" class="blog-link blog-read-more">Read Article →</a>
                 </div>
             </article>
 
             <!-- Blog Post 3 -->
             <article class="blog-card">
-                <div class="blog-image" style="background: linear-gradient(135deg, #44c34a 0%, #66bb6a 100%);"></div>
+                <div class="blog-image" style="background-image: url('{% static 'images/blog/yoga.jpg' %}');"></div>
                 <div class="blog-content">
                     <div class="blog-meta">
                         <span class="blog-date">Feb 25, 2026</span>
@@ -53,13 +54,13 @@
                     </div>
                     <h3>Morning Rituals for Better Health</h3>
                     <p>Simple Ayurvedic morning routines to energize your day, improve digestion, and enhance your overall mental clarity and well-being.</p>
-                    <a href="#" class="blog-link">Read Article →</a>
+                    <a href="#" class="blog-link blog-read-more">Read Article →</a>
                 </div>
             </article>
 
             <!-- Blog Post 4 -->
             <article class="blog-card">
-                <div class="blog-image" style="background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);"></div>
+                <div class="blog-image" style="background-image: url('{% static 'images/blog/seasonal.jpg' %}');"></div>
                 <div class="blog-content">
                     <div class="blog-meta">
                         <span class="blog-date">Feb 22, 2026</span>
@@ -67,13 +68,13 @@
                     </div>
                     <h3>Seasonal Eating Guide</h3>
                     <p>Discover how eating seasonally according to Ayurveda can improve digestion, boost immunity, and align your body with nature's rhythms.</p>
-                    <a href="#" class="blog-link">Read Article →</a>
+                    <a href="#" class="blog-link blog-read-more">Read Article →</a>
                 </div>
             </article>
 
             <!-- Blog Post 5 -->
             <article class="blog-card">
-                <div class="blog-image" style="background: linear-gradient(135deg, #81c784 0%, #a5d6a7 100%);"></div>
+                <div class="blog-image" style="background-image: url('{% static 'images/blog/mesaage1.jpg' %}');"></div>
                 <div class="blog-content">
                     <div class="blog-meta">
                         <span class="blog-date">Feb 20, 2026</span>
@@ -81,13 +82,13 @@
                     </div>
                     <h3>The Art of Self-Massage</h3>
                     <p>Learn Abhyanga, the traditional oil massage technique that promotes relaxation, glowing skin, and emotional balance for inner peace.</p>
-                    <a href="#" class="blog-link">Read Article →</a>
+                    <a href="#" class="blog-link blog-read-more">Read Article →</a>
                 </div>
             </article>
 
             <!-- Blog Post 6 -->
             <article class="blog-card">
-                <div class="blog-image" style="background: linear-gradient(135deg, #a5d6a7 0%, #c8e6c9 100%);"></div>
+                <div class="blog-image" style="background-image: url('{% static 'images/blog/sleep.jpg' %}');"></div>
                 <div class="blog-content">
                     <div class="blog-meta">
                         <span class="blog-date">Feb 18, 2026</span>
@@ -95,11 +96,23 @@
                     </div>
                     <h3>Natural Remedies for Better Sleep</h3>
                     <p>Explore proven Ayurvedic solutions to insomnia and sleep disorders using herbs, practices, and lifestyle adjustments without medication.</p>
-                    <a href="#" class="blog-link">Read Article →</a>
+                    <a href="#" class="blog-link blog-read-more">Read Article →</a>
                 </div>
             </article>
         </div>
     </div>
 </section>
+
+<!-- Blog Coming Soon Popup -->
+<div id="blog-coming-soon-modal" class="blog-modal">
+    <div class="blog-modal-overlay"></div>
+    <div class="blog-modal-content">
+        <button class="blog-modal-close">&times;</button>
+        <div class="blog-modal-icon">📖</div>
+        <h2 class="blog-modal-title">Article Coming Soon</h2>
+        <p class="blog-modal-message">The full article will be available soon. We are preparing detailed Ayurvedic insights for you.</p>
+        <button class="blog-modal-button">Got It</button>
+    </div>
+</div>
 
 {% endblock %}
